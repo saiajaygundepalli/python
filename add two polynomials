@@ -1,0 +1,36 @@
+n=int(input())
+dic={}
+dic1={};dicti={}
+for i in range(n):
+    a,b=map(int,input().split())
+    dic[a]=b
+    
+m=int(input())
+for i in range(m):
+    a,b=map(int,input().split())
+    dic1[a]=b
+    
+for i in dic1:
+    if i in dic:
+        dic[i]+=dic1[i]
+    else:
+        dic.update({i:dic1[i]})
+        
+for i in dic:
+    if (dic[i])!=0:
+        dicti.update({i:dic[i]})
+dicti_result = sorted(dicti.items(),reverse =True)
+
+if len(dicti) == 0:
+    print("0")
+else:
+    list_1=[];list_2=[]
+    for key,value in dicti_result:
+        list_1.append("{}x^{}".format(value,key))
+        list_2 = (" + ").join(list_1)
+        
+        list_2 = list_2.replace("x^0" , "")
+        list_2 = list_2.replace("x^1" , "x")
+        list_2 = list_2.replace("1x" , "x")
+        list_2 = list_2.replace(" + -" , " - ")
+    print(list_2)
