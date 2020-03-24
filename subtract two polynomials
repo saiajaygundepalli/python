@@ -1,0 +1,48 @@
+dic_A = {} ; dic_B = {} ; dic_C = {}
+
+n = int(input())
+for i in range(n):
+    a,b = map(int,input().split())
+    dic_A[a] =b
+#print(dic_A)
+
+m =int(input())
+for i in range(m):
+    p,q = map(int,input().split())
+    dic_B[p] =q
+#print(dic_B)
+
+if n > m:
+    for i in dic_A:
+        if i in dic_B:
+            dic_A[i] -= dic_B[i]
+       
+            
+else :
+    for i in dic_B:
+        if i in dic_A:
+            dic_A[i] -= dic_B[i]
+        else:
+            dic_A.update({i:0-dic_B[i]})
+
+
+for i in dic_A:
+    if dic_A[i]!=0:
+        dic_C.update({i:dic_A[i]})
+result_dic = sorted(dic_C.items(),reverse=True)
+
+list_A = [] ; list_B = []
+
+if len(dic_C) == 0:
+    print('0')
+    
+else:
+    for keys,values in result_dic:
+        list_A.append('{}x^{}'.format(values,keys))
+        list_B = (" + ").join(list_A)
+        list_B = list_B.replace("x^0","")
+        list_B = list_B.replace("x^1","x")
+        list_B = list_B.replace(" 1x^",' x^')
+        list_B = list_B.replace(" 1x ",' x ')
+        list_B = list_B.replace(' + -',' - ')
+    print(list_B)
